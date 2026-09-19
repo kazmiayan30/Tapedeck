@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tapedeck</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📼</text></svg>" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">TAPE</span><span class="brand-mark brand-mark--accent">DECK</span>
+      </div>
+
+      <nav class="side-nav">
+        <button class="side-nav__item is-active" data-view="search">Search</button>
+        <button class="side-nav__item" data-view="queue">Queue</button>
+      </nav>
+
+      <div class="sidebar-section">
+        <h2 class="sidebar-heading">Reels</h2>
+        <form id="new-playlist-form" class="new-playlist-form">
+          <input id="new-playlist-name" type="text" placeholder="Name a new reel…" maxlength="60" />
+          <button type="submit" aria-label="Create reel">+</button>
+        </form>
+        <ul id="playlist-list" class="playlist-list"></ul>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <header class="topbar">
+        <form id="search-form" class="search-form">
+          <input id="search-input" type="text" placeholder="Search for a track, artist, or session…" autocomplete="off" />
+          <button type="submit">Search</button>
+        </form>
+      </header>
+
+      <section id="view-search" class="view">
+        <div id="search-status" class="status-line"></div>
+        <ul id="search-results" class="track-list"></ul>
+      </section>
+
+      <section id="view-queue" class="view" hidden>
+        <div class="view-header-row">
+          <h1 id="queue-title" class="view-title">Up next</h1>
+          <span id="queue-count" class="status-line"></span>
+        </div>
+        <ul id="queue-list" class="track-list"></ul>
+      </section>
+    </main>
+  </div>
+
+  <!-- Now playing strip -->
+  <footer class="player-bar">
+    <div class="np-track">
+      <img id="np-thumb" class="np-thumb" alt="" />
+      <div class="np-meta">
+        <div id="np-title" class="np-title">Nothing loaded</div>
+        <div id="np-channel" class="np-channel">Search and press play to start the reel</div>
+      </div>
+    </div>
+
+    <div class="np-transport">
+      <div class="np-buttons">
+        <button id="btn-shuffle" class="ctrl-btn" title="Shuffle" aria-pressed="false">⤨</button>
+        <button id="btn-prev" class="ctrl-btn" title="Previous">⏮</button>
+        <button id="btn-play" class="ctrl-btn ctrl-btn--primary" title="Play">▶</button>
+        <button id="btn-next" class="ctrl-btn" title="Next">⏭</button>
+        <button id="btn-repeat" class="ctrl-btn" title="Repeat" aria-pressed="false">⟲</button>
+      </div>
+      <div class="np-scrubber">
+        <span id="np-current-time" class="np-time">0:00</span>
+        <div id="np-seek-track" class="seek-track">
+          <div id="np-seek-ticks" class="seek-ticks"></div>
+          <div id="np-seek-fill" class="seek-fill"></div>
+          <div id="np-seek-handle" class="seek-handle"></div>
+        </div>
+        <span id="np-duration" class="np-time">0:00</span>
+      </div>
+    </div>
+
+    <div class="np-volume">
+      <span class="vol-icon">VOL</span>
+      <input id="np-volume-range" type="range" min="0" max="100" value="70" />
+      <div class="np-add">
+        <select id="add-to-playlist-select"></select>
+        <button id="btn-add-current" class="ctrl-btn ctrl-btn--small" title="Add current track to selected reel">+ reel</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- YouTube IFrame target: kept in the DOM but visually hidden. Audio only. -->
+  <div id="yt-player-host" aria-hidden="true"><div id="yt-player"></div></div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="app.js"></script>
+</body>
+</html>
